@@ -1,0 +1,701 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Pour Ariane ❤️ | Un Conte Écrit dans les Étoiles</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@500;700;900&family=Great+Vibes&family=Montserrat:wght@300;400;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          colors: {
+            burgundy: { DEFAULT: '#4a0e17', dark: '#2d080e', light: '#721929' },
+            rosegold: { DEFAULT: '#b76e79', light: '#e8c5c8', dark: '#8e4a54', glow: '#ffd8db' },
+            gold: { DEFAULT: '#d4af37', light: '#f3e5ab' }
+          },
+          fontFamily: {
+            serif: ['Cinzel', 'serif'],
+            script: ['Great Vibes', 'cursive'],
+            sans: ['Montserrat', 'sans-serif']
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    body {
+      background: radial-gradient(ellipse at top, #3a0a12 0%, #1a0408 50%, #0c0205 100%);
+      overflow: hidden;
+      user-select: none;
+    }
+
+    /* Aurore boréale animée en arrière-plan */
+    .aurora {
+      position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: .45;
+      background:
+        radial-gradient(ellipse 60% 40% at 20% 30%, rgba(183,110,121,.25), transparent 60%),
+        radial-gradient(ellipse 50% 50% at 80% 20%, rgba(212,175,55,.15), transparent 60%),
+        radial-gradient(ellipse 70% 50% at 50% 80%, rgba(114,25,41,.3), transparent 60%);
+      animation: auroraShift 14s ease-in-out infinite alternate;
+    }
+    @keyframes auroraShift {
+      0%   { transform: translate(0,0) scale(1); filter: hue-rotate(0deg); }
+      100% { transform: translate(-2%,1%) scale(1.05); filter: hue-rotate(12deg); }
+    }
+
+    .candle-glow { box-shadow: 0 0 60px 12px rgba(232,197,200,.2), inset 0 0 40px rgba(212,175,55,.12); }
+    .gold-shine {
+      border: 2px solid transparent;
+      background:
+        linear-gradient(#2b0a11, #2b0a11) padding-box,
+        linear-gradient(135deg, #d4af37, #b76e79, #f3e5ab, #d4af37) border-box;
+      background-size: 200% 200%;
+      animation: shineMove 5s linear infinite;
+    }
+    @keyframes shineMove { 0%{background-position:0% 50%} 100%{background-position:200% 50%} }
+
+    @keyframes waxPulse {
+      0%,100% { transform: scale(1); filter: drop-shadow(0 0 10px rgba(183,110,121,.6)); }
+      50%     { transform: scale(1.08); filter: drop-shadow(0 0 26px rgba(212,175,55,.95)); }
+    }
+    .animate-wax { animation: waxPulse 3s infinite ease-in-out; }
+
+    @keyframes floatSlow {
+      0%,100% { transform: translateY(0) rotate(0deg); }
+      50%     { transform: translateY(-12px) rotate(1deg); }
+    }
+    .animate-float { animation: floatSlow 5s infinite ease-in-out; }
+
+    @keyframes twinkle { 0%,100%{opacity:.3; transform:scale(.8)} 50%{opacity:1; transform:scale(1.2)} }
+    .animate-twinkle { animation: twinkle 2.5s infinite ease-in-out; }
+
+    /* === Transition page de livre (3D) === */
+    .book-stage { perspective: 2200px; }
+    .page-3d {
+      transform-style: preserve-3d;
+      transition: transform .9s cubic-bezier(.6,.05,.28,.91), opacity .9s ease;
+    }
+    .page-3d.turn-out   { transform: rotateY(-100deg) translateZ(-120px); opacity: 0; }
+    .page-3d.turn-in    { transform: rotateY(100deg) translateZ(-120px); opacity: 0; position: absolute; inset: 0; }
+    .page-3d.turn-reset { transform: rotateY(0) translateZ(0); opacity: 1; }
+    .page-shadow {
+      box-shadow: -18px 0 40px rgba(0,0,0,.55), inset 4px 0 18px rgba(0,0,0,.35);
+      background-image: linear-gradient(90deg, rgba(0,0,0,.35) 0%, transparent 8%);
+    }
+
+    /* Ligne dorée scintillante */
+    .gold-divider {
+      height: 1px;
+      background: linear-gradient(90deg, transparent, #d4af37, #f3e5ab, #d4af37, transparent);
+      background-size: 200% 100%;
+      animation: shineMove 4s linear infinite;
+    }
+
+    .ornament { color: rgba(212,175,55,.4); }
+
+    /* Chronologie */
+    .timeline-dot {
+      width: 14px; height: 14px; border-radius: 50%;
+      background: radial-gradient(circle at 30% 30%, #f3e5ab, #d4af37);
+      box-shadow: 0 0 12px rgba(212,175,55,.8);
+    }
+    .timeline-line {
+      width: 2px;
+      background: linear-gradient(180deg, transparent, #d4af37 15%, #b76e79 85%, transparent);
+    }
+
+    .story-img {
+      filter: saturate(.9) contrast(1.05);
+      transition: transform .8s ease, filter .8s ease;
+    }
+    .story-img:hover { transform: scale(1.06); filter: saturate(1.1) contrast(1.1); }
+
+    .btn-glow { box-shadow: 0 0 28px rgba(212,175,55,.55); }
+    .btn-glow:hover { box-shadow: 0 0 48px rgba(212,175,55,.9); }
+
+    ::-webkit-scrollbar { width: 6px; }
+    ::-webkit-scrollbar-track { background: rgba(45,8,14,.5); }
+    ::-webkit-scrollbar-thumb { background: #b76e79; border-radius: 3px; }
+
+    .hidden-page { display: none !important; }
+  </style>
+</head>
+<body class="text-rosegold-light min-h-screen flex items-center justify-center relative font-sans">
+
+  <div class="aurora"></div>
+  <canvas id="particleCanvas" class="fixed inset-0 pointer-events-none z-0"></canvas>
+
+  <!-- Contrôle son -->
+  <button id="audioToggle" onclick="toggleAudio()"
+    class="fixed top-5 right-5 z-50 bg-burgundy/80 border border-rosegold/40 hover:border-gold p-3 rounded-full text-rosegold-light hover:text-gold transition-all duration-300 shadow-lg backdrop-blur-md">
+    <i id="audioIcon" class="fas fa-volume-mute text-lg w-6 h-6 flex items-center justify-center"></i>
+  </button>
+
+  <!-- =================== LIVRE =================== -->
+  <main class="book-stage relative z-10 w-full max-w-4xl px-4 py-6 flex justify-center items-center">
+
+    <!-- ===== PAGE 0 : COUVERTURE ===== -->
+    <div id="page-cover" class="page-3d page-shadow w-full max-w-lg bg-gradient-to-br from-burgundy via-burgundy-dark to-[#150308] p-8 md:p-12 rounded-r-2xl rounded-l-md border border-rosegold/30 candle-glow text-center animate-float">
+      <div class="absolute top-3 left-3 ornament text-xl">✦</div>
+      <div class="absolute top-3 right-3 ornament text-xl">✦</div>
+      <div class="absolute bottom-3 left-3 ornament text-xl">✦</div>
+      <div class="absolute bottom-3 right-3 ornament text-xl">✦</div>
+
+      <p class="text-[11px] font-serif uppercase tracking-[.35em] text-gold/80 mb-6">Un conte écrit dans les étoiles</p>
+
+      <div class="mb-6 inline-block relative cursor-pointer" onclick="openBook()">
+        <div class="w-28 h-28 rounded-full bg-gradient-to-tr from-burgundy-light via-rosegold to-gold p-1 animate-wax shadow-2xl flex items-center justify-center mx-auto">
+          <div class="w-full h-full rounded-full bg-burgundy-dark flex flex-col items-center justify-center border border-rosegold/50">
+            <i class="fas fa-envelope-open-text text-3xl text-rosegold-glow"></i>
+            <span class="text-[9px] font-serif uppercase tracking-widest text-gold mt-1">Pour toi</span>
+          </div>
+        </div>
+      </div>
+
+      <h1 class="font-script text-6xl md:text-7xl text-transparent bg-clip-text bg-gradient-to-r from-rosegold-light via-gold to-rosegold mb-3">Hé Ariane…</h1>
+      <div class="gold-divider w-40 mx-auto my-4"></div>
+      <p class="font-serif italic text-lg text-rosegold-light/90 mb-2">« J'ai quelque chose de très important à te demander. »</p>
+      <p class="text-xs text-rosegold/70 uppercase tracking-widest font-serif mb-8">Tourne la page pour découvrir notre histoire</p>
+
+      <button onclick="openBook()"
+        class="group relative inline-flex items-center gap-3 px-8 py-4 bg-gradient-to-r from-rosegold-dark via-burgundy-light to-rosegold-dark rounded-full text-gold font-serif font-semibold shadow-xl border border-gold/40 hover:border-gold hover:scale-105 active:scale-95 transition-all duration-300">
+        <span>Ouvrir le livre</span>
+        <i class="fas fa-book-open text-gold group-hover:rotate-12 transition-transform"></i>
+      </button>
+    </div>
+
+    <!-- ===== PAGE 1 : CHAPITRE I ===== -->
+    <div id="page-ch1" class="hidden-page page-3d page-shadow w-full max-w-3xl bg-gradient-to-b from-[#2b0a11] to-[#150308] rounded-r-2xl rounded-l-md border border-rosegold/40 p-6 md:p-10 candle-glow">
+      <div class="text-center mb-5">
+        <span class="text-[11px] font-serif text-gold tracking-[.3em] uppercase">Chapitre I</span>
+        <h2 class="font-script text-5xl text-rosegold-glow mt-1">L'Étincelle</h2>
+        <div class="gold-divider w-28 mx-auto mt-3"></div>
+      </div>
+
+      <div class="flex flex-col md:flex-row items-center gap-7">
+        <div class="w-full md:w-1/2 relative group">
+          <div class="w-full h-60 rounded-xl overflow-hidden border border-gold/40 relative shadow-2xl">
+            <img class="story-img w-full h-full object-cover"
+              src="https://images.unsplash.com/photo-1518199266791-5375a83190b7?auto=format&fit=crop&w=900&q=80"
+              alt="Premier regard">
+            <div class="absolute inset-0 bg-gradient-to-t from-burgundy-dark via-transparent to-transparent"></div>
+            <span class="absolute bottom-3 left-3 text-[11px] font-serif text-gold">✦ Première Étincelle</span>
+          </div>
+        </div>
+        <div class="w-full md:w-1/2 text-left space-y-4">
+          <h3 class="font-serif text-2xl text-gold">Le jour où tout a commencé</h3>
+          <p class="text-sm leading-relaxed text-rosegold-light/85">
+            Il y a des rencontres qui changent tout sans prévenir. La tienne a été comme une étincelle :
+            discrète d'abord, puis impossible à ignorer. Depuis ce premier instant, mon monde a pris
+            une couleur que je ne connaissais pas.
+          </p>
+          <p class="text-xs italic text-rosegold/75">« Ton sourire est immédiatement devenu ma lumière préférée. »</p>
+        </div>
+      </div>
+
+      <div class="flex justify-end mt-8 pt-4 border-t border-rosegold/20">
+        <button onclick="goPage('page-ch2')"
+          class="px-7 py-2.5 rounded-full bg-gradient-to-r from-rosegold to-gold text-burgundy-dark font-serif font-bold text-xs hover:scale-105 active:scale-95 transition-all shadow-lg btn-glow">
+          Chapitre suivant <i class="fas fa-chevron-right ml-1"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== PAGE 2 : CHAPITRE II — FRISE ===== -->
+    <div id="page-ch2" class="hidden-page page-3d page-shadow w-full max-w-3xl bg-gradient-to-b from-[#2b0a11] to-[#150308] rounded-r-2xl rounded-l-md border border-rosegold/40 p-6 md:p-10 candle-glow overflow-y-auto max-h-[90vh]">
+      <div class="text-center mb-5">
+        <span class="text-[11px] font-serif text-gold tracking-[.3em] uppercase">Chapitre II</span>
+        <h2 class="font-script text-5xl text-rosegold-glow mt-1">Notre Frise</h2>
+        <div class="gold-divider w-28 mx-auto mt-3"></div>
+        <p class="text-xs text-rosegold/70 mt-3 font-serif italic">Les petits moments qui font notre grande histoire</p>
+      </div>
+
+      <div class="relative pl-8 md:pl-10 py-2">
+        <div class="timeline-line absolute left-3 md:left-4 top-0 bottom-0"></div>
+
+        <div class="relative mb-7">
+          <div class="timeline-dot absolute -left-5 md:-left-6 top-1"></div>
+          <div class="bg-burgundy/50 border border-rosegold/25 rounded-xl p-4 backdrop-blur-sm">
+            <span class="text-[10px] font-serif uppercase tracking-widest text-gold">Le premier éclat de rire</span>
+            <h4 class="font-serif text-lg text-rosegold-glow mt-1">Une complicité immédiate</h4>
+            <p class="text-xs text-rosegold-light/80 mt-1 leading-relaxed">Ce moment où l'on a compris que parler ensemble n'avait jamais de fin. Les fous rires qui partent de nulle part et durent trop longtemps.</p>
+          </div>
+        </div>
+
+        <div class="relative mb-7">
+          <div class="timeline-dot absolute -left-5 md:-left-6 top-1"></div>
+          <div class="bg-burgundy/50 border border-rosegold/25 rounded-xl p-4 backdrop-blur-sm">
+            <span class="text-[10px] font-serif uppercase tracking-widest text-gold">Nos aventures</span>
+            <h4 class="font-serif text-lg text-rosegold-glow mt-1">Un univers à deux</h4>
+            <p class="text-xs text-rosegold-light/80 mt-1 leading-relaxed">Chaque sortie, chaque projet, chaque petit week-end ou grand voyage : avec toi, même l'ordinaire devient magique.</p>
+          </div>
+        </div>
+
+        <div class="relative mb-7">
+          <div class="timeline-dot absolute -left-5 md:-left-6 top-1"></div>
+          <div class="bg-burgundy/50 border border-rosegold/25 rounded-xl p-4 backdrop-blur-sm">
+            <span class="text-[10px] font-serif uppercase tracking-widest text-gold">Les silences doux</span>
+            <h4 class="font-serif text-lg text-rosegold-glow mt-1">Être bien sans rien dire</h4>
+            <p class="text-xs text-rosegold-light/80 mt-1 leading-relaxed">Ces moments où l'on peut juste être ensemble, sans mots, à écouter le monde tourner en douceur.</p>
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="timeline-dot absolute -left-5 md:-left-6 top-1"></div>
+          <div class="bg-burgundy/50 border border-gold/40 rounded-xl p-4 backdrop-blur-sm shadow-[0_0_20px_rgba(212,175,55,.25)]">
+            <span class="text-[10px] font-serif uppercase tracking-widest text-gold">Aujourd'hui</span>
+            <h4 class="font-serif text-lg text-gold mt-1">Une évidence</h4>
+            <p class="text-xs text-rosegold-light/85 mt-1 leading-relaxed">Je sais, sans l'ombre d'un doute, que je veux écrire tous mes futurs chapitres avec toi.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="flex justify-between mt-8 pt-4 border-t border-rosegold/20">
+        <button onclick="goPage('page-ch1')"
+          class="px-5 py-2.5 rounded-full border border-rosegold/30 hover:border-gold text-xs font-serif text-rosegold-light transition-all">
+          <i class="fas fa-chevron-left mr-1"></i> Précédent
+        </button>
+        <button onclick="goPage('page-question')"
+          class="px-7 py-2.5 rounded-full bg-gradient-to-r from-rosegold to-gold text-burgundy-dark font-serif font-bold text-xs hover:scale-105 active:scale-95 transition-all shadow-lg btn-glow">
+          La suite… <i class="fas fa-chevron-right ml-1"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- ===== PAGE 3 : LA GRANDE QUESTION ===== -->
+    <div id="page-question" class="hidden-page page-3d page-shadow w-full max-w-2xl bg-gradient-to-b from-burgundy via-burgundy-dark to-[#0e0205] rounded-r-2xl rounded-l-md border-2 border-gold/50 p-8 md:p-12 candle-glow text-center relative">
+      <div class="absolute top-3 left-3 ornament text-xl">✦</div>
+      <div class="absolute top-3 right-3 ornament text-xl">✦</div>
+      <div class="absolute bottom-3 left-3 ornament text-xl">✦</div>
+      <div class="absolute bottom-3 right-3 ornament text-xl">✦</div>
+
+      <div class="relative w-full h-32 mb-3 flex justify-center items-center">
+        <div class="absolute inset-0 flex justify-center items-center">
+          <div class="w-44 h-44 rounded-t-full border-t-4 border-l-4 border-r-4 border-gold/60 shadow-[0_0_35px_rgba(212,175,55,.45)] animate-pulse"></div>
+        </div>
+        <div class="relative z-10">
+          <i class="fas fa-crown text-3xl text-gold drop-shadow-[0_0_12px_rgba(212,175,55,.9)]"></i>
+          <div class="text-3xl mt-1">💖</div>
+        </div>
+      </div>
+
+      <span class="text-[11px] font-serif uppercase tracking-[.3em] text-gold mb-2 block">Ariane, mon évidence</span>
+      <h2 class="font-script text-5xl md:text-6xl text-transparent bg-clip-text bg-gradient-to-r from-rosegold-glow via-gold to-rosegold-light mb-5 leading-tight">
+        Veux-tu être ma copine ?
+      </h2>
+      <div class="gold-divider w-32 mx-auto mb-5"></div>
+      <p class="text-sm md:text-base text-rosegold-light/90 max-w-md mx-auto mb-9 leading-relaxed font-serif italic">
+        Pour continuer cette aventure ensemble, main dans la main, et écrire la suite de notre conte…
+      </p>
+
+      <div class="relative min-h-[130px] flex flex-col md:flex-row items-center justify-center gap-6">
+        <button id="yesBtn" onclick="handleYes()"
+          class="w-full md:w-auto px-10 py-5 bg-gradient-to-r from-gold via-rosegold-glow to-gold text-burgundy-dark font-serif font-bold text-lg rounded-full btn-glow hover:scale-110 active:scale-95 transition-all duration-300 z-20 flex items-center justify-center gap-3">
+          <i class="fas fa-heart text-burgundy"></i>
+          <span>Oui, mille fois oui !</span>
+        </button>
+
+        <button id="noBtn" onmouseover="dodgeNoButton()" onclick="dodgeNoButton()"
+          class="w-full md:w-auto px-8 py-4 bg-burgundy-light/60 border border-rosegold/40 text-rosegold-light/80 font-serif text-sm rounded-full hover:bg-burgundy-light transition-all duration-200 z-10">
+          Laisse-moi réfléchir… 😜
+        </button>
+      </div>
+
+      <p id="dodgeCounter" class="text-[11px] text-rosegold/60 mt-5 font-serif italic opacity-0 transition-opacity">…</p>
+
+      <div class="mt-8 pt-4 border-t border-rosegold/20">
+        <button onclick="goPage('page-ch2')"
+          class="px-5 py-2.5 rounded-full border border-rosegold/30 hover:border-gold text-xs font-serif text-rosegold-light transition-all">
+          <i class="fas fa-chevron-left mr-1"></i> Revenir au chapitre II
+        </button>
+      </div>
+    </div>
+
+  </main>
+
+  <!-- ===== OVERLAY VIDÉO PLEIN ÉCRAN ===== -->
+  <div id="videoOverlay" class="hidden fixed inset-0 bg-black z-[60] flex items-center justify-center">
+    <video id="victoryVideo" class="w-full h-full object-contain" playsinline>
+      <source src="assets/video.mp4" type="video/mp4">
+    </video>
+    <button onclick="skipVideo()"
+      class="absolute top-5 right-5 bg-black/60 border border-gold/50 text-gold px-4 py-2 rounded-full text-xs font-serif hover:bg-black/80 transition-all">
+      Passer <i class="fas fa-forward ml-1"></i>
+    </button>
+    <div class="absolute bottom-6 left-0 right-0 text-center opacity-0 animate-pulse" id="videoCaption">
+      <span class="font-script text-3xl text-gold drop-shadow-[0_0_12px_rgba(212,175,55,.9)]">Pour toi, Ariane 💖</span>
+    </div>
+  </div>
+
+  <!-- ===== OVERLAY APRÈS VIDÉO : ncl.html ===== -->
+  <div id="nclOverlay" class="hidden fixed inset-0 bg-black z-[70]">
+    <iframe id="nclFrame" src="ncl.html" class="w-full h-full border-0" allow="autoplay; fullscreen"></iframe>
+    <button onclick="closeNcl()"
+      class="absolute top-5 left-5 bg-black/60 border border-gold/50 text-gold px-4 py-2 rounded-full text-xs font-serif hover:bg-black/80 transition-all z-10">
+      <i class="fas fa-arrow-left mr-1"></i> Retour
+    </button>
+  </div>
+
+  <script>
+    /* ================= CONFIG ================= */
+    const CONFIG = {
+      prenom: "Ariane",
+    };
+
+    /* ================= NAVIGATION LIVRE ================= */
+    const pages = ["page-cover", "page-ch1", "page-ch2", "page-question"];
+    let currentPage = "page-cover";
+    let isTurning = false;
+
+    function goPage(targetId) {
+      if (isTurning || targetId === currentPage) return;
+      isTurning = true;
+      playSound("flip");
+
+      const cur = document.getElementById(currentPage);
+      const nxt = document.getElementById(targetId);
+
+      // Page courante sort vers la gauche (comme un retournement)
+      cur.classList.remove("turn-in", "turn-reset");
+      cur.classList.add("turn-out");
+
+      setTimeout(() => {
+        cur.classList.add("hidden-page");
+        cur.classList.remove("turn-out");
+
+        nxt.classList.remove("hidden-page", "turn-out");
+        nxt.classList.add("turn-in");
+
+        // Force reflow puis page entrante se remet à plat
+        void nxt.offsetWidth;
+        nxt.classList.remove("turn-in");
+        nxt.classList.add("turn-reset");
+
+        currentPage = targetId;
+        setTimeout(() => { isTurning = false; }, 700);
+      }, 450);
+    }
+
+    function openBook() {
+      initAudio();
+      goPage("page-ch1");
+    }
+
+    /* ================= AUDIO (Web Audio) ================= */
+    let audioCtx = null;
+    let isMuted = true;
+    let ambientNodes = [];
+    let ambientInterval = null;
+
+    function initAudio() {
+      if (!audioCtx) audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      if (audioCtx.state === "suspended") audioCtx.resume();
+    }
+
+    function playTone(freq, start, dur, type = "sine", vol = 0.12) {
+      if (!audioCtx) return;
+      const o = audioCtx.createOscillator();
+      const g = audioCtx.createGain();
+      o.connect(g); g.connect(audioCtx.destination);
+      o.type = type;
+      o.frequency.setValueAtTime(freq, start);
+      g.gain.setValueAtTime(0, start);
+      g.gain.linearRampToValueAtTime(vol, start + 0.02);
+      g.gain.exponentialRampToValueAtTime(0.001, start + dur);
+      o.start(start);
+      o.stop(start + dur + 0.05);
+      ambientNodes.push(o);
+    }
+
+    function playSound(type) {
+      if (isMuted || !audioCtx) return;
+      const now = audioCtx.currentTime;
+      if (type === "click") {
+        playTone(660, now, 0.12, "sine", 0.08);
+        playTone(990, now + 0.05, 0.1, "sine", 0.05);
+      } else if (type === "flip") {
+        // Bruit de page : petit glissando
+        const o = audioCtx.createOscillator();
+        const g = audioCtx.createGain();
+        o.connect(g); g.connect(audioCtx.destination);
+        o.type = "triangle";
+        o.frequency.setValueAtTime(180, now);
+        o.frequency.exponentialRampToValueAtTime(700, now + 0.22);
+        g.gain.setValueAtTime(0.12, now);
+        g.gain.exponentialRampToValueAtTime(0.001, now + 0.25);
+        o.start(now); o.stop(now + 0.3);
+      } else if (type === "victory") {
+        // Carillon C-E-G-C
+        [523.25, 659.25, 783.99, 1046.5].forEach((f, i) => {
+          playTone(f, now + i * 0.13, 1.6, "sine", 0.2);
+          playTone(f * 2, now + i * 0.13, 1.2, "sine", 0.08);
+        });
+        // Petite basse douce
+        playTone(130.81, now, 2.2, "sine", 0.12);
+      }
+    }
+
+    // Musique d'ambiance : arpège doux en boucle
+    const arpNotes = [261.63, 329.63, 392.0, 523.25, 392.0, 329.63]; // C E G C G E
+    let arpIndex = 0;
+
+    function startAmbient() {
+      if (!audioCtx || ambientInterval) return;
+      ambientInterval = setInterval(() => {
+        if (isMuted) return;
+        const now = audioCtx.currentTime;
+        playTone(arpNotes[arpIndex % arpNotes.length], now, 1.4, "sine", 0.06);
+        // Pad très doux de fond
+        if (arpIndex % 6 === 0) playTone(130.81, now, 3.5, "sine", 0.05);
+        arpIndex++;
+      }, 480);
+    }
+
+    function stopAmbient() {
+      if (ambientInterval) { clearInterval(ambientInterval); ambientInterval = null; }
+    }
+
+    function toggleAudio() {
+      initAudio();
+      isMuted = !isMuted;
+      const icon = document.getElementById("audioIcon");
+      if (isMuted) {
+        icon.className = "fas fa-volume-mute text-lg w-6 h-6 flex items-center justify-center";
+        stopAmbient();
+      } else {
+        icon.className = "fas fa-volume-up text-lg text-gold w-6 h-6 flex items-center justify-center";
+        playSound("click");
+        startAmbient();
+      }
+    }
+
+    /* ================= BOUTON NON QUI FUIT ================= */
+    let dodgeCount = 0;
+    const dodgeMessages = [
+      "Vraiment ? 😢",
+      "Tu es sûre ? 🥺",
+      "Réfléchis bien… 👀",
+      "Le bouton OUI brille, hein ? ✨",
+      "Bon… j'insiste une dernière fois 😌",
+    ];
+
+    function dodgeNoButton() {
+      playSound("click");
+      const noBtn = document.getElementById("noBtn");
+      const counter = document.getElementById("dodgeCounter");
+      dodgeCount++;
+
+      counter.textContent = dodgeMessages[Math.min(dodgeCount - 1, dodgeMessages.length - 1)];
+      counter.style.opacity = "1";
+
+      if (dodgeCount >= 5) {
+        noBtn.innerHTML = "Oui ! ❤️";
+        noBtn.className = "w-full md:w-auto px-8 py-4 bg-gradient-to-r from-gold to-rosegold text-burgundy-dark font-serif font-bold text-sm rounded-full shadow-lg hover:scale-110 transition-all";
+        noBtn.onclick = handleYes;
+        noBtn.onmouseover = null;
+        noBtn.style.transform = "";
+        counter.textContent = "Le bouton a fini par accepter… 😌";
+        return;
+      }
+
+      const x = (Math.random() - 0.5) * 260;
+      const y = (Math.random() - 0.5) * 150;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    function resetNoButton() {
+      const noBtn = document.getElementById("noBtn");
+      noBtn.innerHTML = "Laisse-moi réfléchir… 😜";
+      noBtn.className = "w-full md:w-auto px-8 py-4 bg-burgundy-light/60 border border-rosegold/40 text-rosegold-light/80 font-serif text-sm rounded-full hover:bg-burgundy-light transition-all duration-200 z-10";
+      noBtn.onclick = dodgeNoButton;
+      noBtn.onmouseover = dodgeNoButton;
+      noBtn.style.transform = "";
+      document.getElementById("dodgeCounter").style.opacity = "0";
+    }
+
+    /* ================= VICTOIRE ================= */
+    function handleYes() {
+      playSound("victory");
+      triggerCelebration();
+      playFullscreenVideo();
+    }
+
+    function playFullscreenVideo() {
+      const overlay = document.getElementById("videoOverlay");
+      const video = document.getElementById("victoryVideo");
+      const caption = document.getElementById("videoCaption");
+
+      overlay.classList.remove("hidden");
+      caption.style.opacity = "0";
+
+      // Plein écran natif (API Fullscreen)
+      const req = overlay.requestFullscreen || overlay.webkitRequestFullscreen;
+      if (req) {
+        try { req.call(overlay); } catch (e) { /* fallback : l'overlay couvre déjà tout l'écran */ }
+      }
+
+      video.currentTime = 0;
+      video.muted = false;
+      const p = video.play();
+      if (p !== undefined) {
+        p.catch(() => {
+          const retry = () => { video.play().catch(() => {}); document.removeEventListener("click", retry); };
+          document.addEventListener("click", retry, { once: true });
+        });
+      }
+
+      // Légende qui apparaît après 1,5 s
+      setTimeout(() => { caption.style.transition = "opacity 1s"; caption.style.opacity = "1"; }, 1500);
+
+      video.onended = () => closeVideoAndCelebrate();
+    }
+
+    function skipVideo() {
+      closeVideoAndCelebrate();
+    }
+
+    function closeVideoAndCelebrate() {
+      const overlay = document.getElementById("videoOverlay");
+      const video = document.getElementById("victoryVideo");
+      video.pause();
+      video.currentTime = 0;
+
+      // Sortir du plein écran natif
+      if (document.fullscreenElement && document.exitFullscreen) {
+        document.exitFullscreen().catch(() => {});
+      } else if (document.webkitFullscreenElement && document.webkitExitFullscreen) {
+        document.webkitExitFullscreen();
+      }
+
+      overlay.classList.add("hidden");
+
+      // Afficher ncl.html (rechargé pour repartir de zéro)
+      const nclOverlay = document.getElementById("nclOverlay");
+      const nclFrame = document.getElementById("nclFrame");
+      nclFrame.src = "ncl.html";
+      nclOverlay.classList.remove("hidden");
+    }
+
+    function closeNcl() {
+      const nclOverlay = document.getElementById("nclOverlay");
+      nclOverlay.classList.add("hidden");
+      // Vider l'iframe pour couper le son ncl
+      document.getElementById("nclFrame").src = "about:blank";
+    }
+
+    /* ================= PARTICULES ================= */
+    const canvas = document.getElementById("particleCanvas");
+    const ctx = canvas.getContext("2d");
+    let particles = [];
+
+    function resizeCanvas() {
+      canvas.width = window.innerWidth;
+      canvas.height = window.innerHeight;
+    }
+    window.addEventListener("resize", resizeCanvas);
+    resizeCanvas();
+
+    class Particle {
+      constructor(opts = {}) {
+        this.reset(opts);
+      }
+      reset(opts = {}) {
+        this.x = opts.x ?? Math.random() * canvas.width;
+        this.y = opts.y ?? Math.random() * canvas.height;
+        this.size = opts.size ?? Math.random() * 12 + 5;
+        this.speedY = opts.speedY ?? -(Math.random() * 1.4 + 0.4);
+        this.speedX = opts.speedX ?? Math.sin(this.y * 0.01) * 0.7;
+        this.opacity = opts.opacity ?? Math.random() * 0.7 + 0.3;
+        const r = Math.random();
+        this.type = opts.type ?? (r > 0.55 ? "sparkle" : r > 0.3 ? "heart" : r > 0.15 ? "petal" : "firefly");
+        this.color = this.type === "sparkle" ? "#f3e5ab"
+                   : this.type === "heart" ? "#ff758c"
+                   : this.type === "firefly" ? "#ffe9a3"
+                   : "#b76e79";
+        this.rotation = Math.random() * Math.PI * 2;
+        this.rotationSpeed = (Math.random() - 0.5) * 0.03;
+        this.life = opts.life ?? Infinity;
+      }
+      update() {
+        this.y += this.speedY;
+        this.x += Math.sin(this.y * 0.012) * 0.45 + this.speedX * 0.15;
+        this.rotation += this.rotationSpeed;
+        if (this.life !== Infinity) this.life--;
+        if (this.type === "firefly") this.opacity = 0.3 + Math.abs(Math.sin(Date.now() * 0.003 + this.x)) * 0.7;
+        if (this.y < -30 || this.life <= 0) this.reset({ y: canvas.height + 10, x: Math.random() * canvas.width });
+      }
+      draw() {
+        ctx.save();
+        ctx.translate(this.x, this.y);
+        ctx.rotate(this.rotation);
+        ctx.globalAlpha = Math.max(0, this.opacity);
+        if (this.type === "sparkle") {
+          ctx.fillStyle = "#f3e5ab";
+          ctx.beginPath(); ctx.arc(0, 0, this.size / 3.2, 0, Math.PI * 2); ctx.fill();
+          // Petit éclat en croix
+          ctx.strokeStyle = "rgba(243,229,171,.7)";
+          ctx.lineWidth = 1;
+          ctx.beginPath();
+          ctx.moveTo(-this.size / 2, 0); ctx.lineTo(this.size / 2, 0);
+          ctx.moveTo(0, -this.size / 2); ctx.lineTo(0, this.size / 2);
+          ctx.stroke();
+        } else if (this.type === "heart") {
+          ctx.fillStyle = "#ff758c";
+          ctx.font = `${this.size}px serif`;
+          ctx.fillText("♥", 0, 0);
+        } else if (this.type === "firefly") {
+          const grd = ctx.createRadialGradient(0, 0, 0, 0, 0, this.size);
+          grd.addColorStop(0, "rgba(255,233,163,.9)");
+          grd.addColorStop(1, "rgba(255,233,163,0)");
+          ctx.fillStyle = grd;
+          ctx.beginPath(); ctx.arc(0, 0, this.size, 0, Math.PI * 2); ctx.fill();
+        } else {
+          ctx.fillStyle = "#b76e79";
+          ctx.beginPath();
+          ctx.ellipse(0, 0, this.size / 2, this.size / 4, 0, 0, Math.PI * 2);
+          ctx.fill();
+        }
+        ctx.restore();
+      }
+    }
+
+    // Pool initial
+    for (let i = 0; i < 85; i++) particles.push(new Particle());
+
+    function animateParticles() {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      particles.forEach(p => { p.update(); p.draw(); });
+      requestAnimationFrame(animateParticles);
+    }
+    animateParticles();
+
+    function triggerCelebration() {
+      for (let i = 0; i < 160; i++) {
+        const angle = Math.random() * Math.PI * 2;
+        const speed = Math.random() * 13 + 3;
+        particles.push(new Particle({
+          x: canvas.width / 2,
+          y: canvas.height / 2,
+          speedX: Math.cos(angle) * speed,
+          speedY: Math.sin(angle) * speed,
+          size: Math.random() * 18 + 8,
+          opacity: 1,
+          life: 90 + Math.random() * 60,
+          type: ["sparkle", "heart", "petal", "firefly"][Math.floor(Math.random() * 4)]
+        }));
+      }
+    }
+
+    /* Init: précharger l'audio au premier geste */
+    document.addEventListener("click", function once() {
+      initAudio();
+      document.removeEventListener("click", once);
+    }, { once: true });
+  </script>
+</body>
+</html>
