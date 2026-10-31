@@ -804,6 +804,56 @@
       }
     }
 
+    // Aurores boréales : rideaux de lumière dansants (courbes lissées)
+    const CURTAINS = [
+      { yF: 0.30, amp: 70, freq: 420, spd: 0.00022, hue: 150, dep: 0.50, alpha: 0.13 }, // vert émeraude
+      { yF: 0.22, amp: 95, freq: 560, spd: -0.00016, hue: 185, dep: 0.68, alpha: 0.10 },// turquoise
+      { yF: 0.36, amp: 55, freq: 300, spd: 0.00027, hue: 265, dep: 0.44, alpha: 0.09 }, // violet
+      { yF: 0.26, amp: 120, freq: 680, spd: 0.00013, hue: 320, dep: 0.55, alpha: 0.06 },// touche magenta
+      { yF: 0.42, amp: 45, freq: 240, spd: 0.00030, hue: 120, dep: 0.36, alpha: 0.09 }, // vert-lime bas
+    ];
+
+    function drawAurora(t) {
+      ctx.save();
+      ctx.globalCompositeOperation = "lighter";
+      for (const a of CURTAINS) {
+        const baseY = canvas.height * a.yF;
+        const pts = [];
+        const stepX = 30;
+        for (let x = -40; x <= canvas.width + 40; x += stepX) {
+          const y = baseY
+            + Math.sin(x / a.freq + t * a.spd) * a.amp
+            + Math.sin(x / (a.freq * 0.45) + t * a.spd * 1.8 + 1.7) * a.amp * 0.32;
+          pts.push([x, y]);
+        }
+        const depth = canvas.height * a.dep * (0.85 + 0.15 * Math.sin(t * 0.00035 + a.hue));
+        const top = Math.min(...pts.map(p => p[1]));
+
+        // Rideau (silhouette pleine douce)
+        ctx.beginPath();
+        ctx.moveTo(pts[0][0], pts[0][1]);
+        for (const p of pts) ctx.lineTo(p[0], p[1]);
+        for (let i = pts.length - 1; i >= 0; i--) ctx.lineTo(pts[i][0], pts[i][1] + depth);
+        ctx.closePath();
+        const g = ctx.createLinearGradient(0, top, 0, top + depth + a.amp * 2);
+        g.addColorStop(0, `hsla(${a.hue}, 95%, 62%, ${a.alpha})`);
+        g.addColorStop(0.3, `hsla(${a.hue + 15}, 95%, 55%, ${a.alpha * 0.55})`);
+        g.addColorStop(0.7, `hsla(${a.hue + 35}, 90%, 45%, ${a.alpha * 0.18})`);
+        g.addColorStop(1, "hsla(220, 90%, 50%, 0)");
+        ctx.fillStyle = g;
+        ctx.fill();
+
+        // Bord brillant en haut du rideau
+        ctx.beginPath();
+        ctx.moveTo(pts[0][0], pts[0][1]);
+        for (const p of pts) ctx.lineTo(p[0], p[1]);
+        ctx.strokeStyle = `hsla(${a.hue + 10}, 100%, 78%, ${a.alpha * 1.5})`;
+        ctx.lineWidth = 2.2;
+        ctx.stroke();
+      }
+      ctx.restore();
+    }
+
     function drawSky(t) {
       // Étoiles scintillantes
       for (const s of bgStars) {
@@ -914,6 +964,7 @@
 
     function animateParticles(t = 0) {
       ctx.clearRect(0, 0, canvas.width, canvas.height);
+      drawAurora(t);
       drawSky(t);
       particles.forEach(p => { p.update(); p.draw(); });
       requestAnimationFrame(animateParticles);
