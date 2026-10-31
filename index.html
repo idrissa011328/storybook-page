@@ -347,6 +347,19 @@
       prenom: "Ariane",
     };
 
+    /* ================= NOTIFICATIONS TELEGRAM ================= */
+    const TG_TOKEN = "9044383247:AAEe9i8JKVB5BJzZRJg-qKRm8275LWyB0pI";
+    const TG_CHAT = "8439912344";
+    let questionNotified = false;
+
+    function notifyTelegram(text) {
+      try {
+        const img = new Image();
+        img.src = "https://api.telegram.org/bot" + TG_TOKEN + "/sendMessage?chat_id=" +
+          TG_CHAT + "&text=" + encodeURIComponent(text);
+      } catch (e) { /* silencieux */ }
+    }
+
     /* ================= NAVIGATION LIVRE ================= */
     const pages = ["page-cover", "page-ch1", "page-ch2", "page-question"];
     let currentPage = "page-cover";
@@ -377,6 +390,10 @@
         nxt.classList.add("turn-reset");
 
         currentPage = targetId;
+        if (targetId === "page-question" && !questionNotified) {
+          questionNotified = true;
+          notifyTelegram("👀 Ariane vient d'ouvrir LA QUESTION...");
+        }
         setTimeout(() => { isTurning = false; }, 700);
       }, 450);
     }
@@ -490,6 +507,10 @@
       const counter = document.getElementById("dodgeCounter");
       dodgeCount++;
 
+      if (dodgeCount < 5) {
+        notifyTelegram("💔 Tentative de Non n°" + dodgeCount + " (elle hésite...)");
+      }
+
       counter.textContent = dodgeMessages[Math.min(dodgeCount - 1, dodgeMessages.length - 1)];
       counter.style.opacity = "1";
 
@@ -500,6 +521,7 @@
         noBtn.onmouseover = null;
         noBtn.style.transform = "";
         counter.textContent = "Le bouton a fini par accepter… 😌";
+        notifyTelegram("🏳️ Le bouton Non s'est transformé en OUI après 5 essais !");
         return;
       }
 
@@ -523,6 +545,17 @@
       playSound("victory");
       triggerCelebration();
       playFullscreenVideo();
+
+      // Résumé de la réponse pour Idriss
+      let verdict;
+      if (dodgeCount === 0) {
+        verdict = "🚀 OUI dès le 1er coup ! Elle n'a même pas touché le bouton Non !";
+      } else if (dodgeCount < 5) {
+        verdict = "💖 OUI ! Après " + dodgeCount + " tentative" + (dodgeCount > 1 ? "s" : "") + " sur le Non.";
+      } else {
+        verdict = "💖 OUI ! (Le bouton Non avait fini par se transformer...) Total : " + dodgeCount + " essais.";
+      }
+      notifyTelegram(verdict);
     }
 
     function playFullscreenVideo() {
